@@ -20,7 +20,7 @@ if "FLASK_ENV" in os.environ:
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def hello_world():
     log.debug(request.path)
 
