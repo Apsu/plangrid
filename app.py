@@ -30,5 +30,18 @@ def hello_world():
 
     return "<p>Hello, World</p>"
 
+@app.route("/<target>")
+def world(target):
+    if "lang" in request.args and request.args["lang"] == "es":
+        msg = "Hola {}!".format(target)
+    else:
+        msg = "Hello {}!".format(target)
+
+    if "Accept" in request.headers:
+        if "application/json" in request.accept_mimetypes:
+            msg = jsonify({"msgs": [msg]})
+
+    return msg
+
 if __name__ == "__main__":
     app.run(debug=debug)
